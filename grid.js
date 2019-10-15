@@ -19,7 +19,7 @@ let Grid = class Grid
 
    add (columnNumber, color) 
    {
-      if (!Number.isInteger(columnNumber) || columnNumber > this.columns-1 || columnNumber < 0) 
+      if (!Number.isInteger(columnNumber) || columnNumber > this.columns || columnNumber < 0) 
          throw new Error('bad column number')
 
       if (!['yellow', 'red'].includes(color)) 
