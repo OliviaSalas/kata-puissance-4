@@ -27,7 +27,7 @@ describe('analyzer', function() {
             grid.add(1, 'red')
             grid.add(1, 'red')
 
-            let analyzer = new Analyzer(grid); 
+            let analyzer = new Analyzer(grid);
 
             //then
             expect(analyzer.result()).to.equal('win')
@@ -43,8 +43,8 @@ describe('analyzer', function() {
           grid.add(1, 'red')
           grid.add(1, 'red')
           grid.add(1, 'red')
-          
-          let analyzer = new Analyzer(grid); 
+
+          let analyzer = new Analyzer(grid);
 
           // then
           expect(analyzer.result()).to.equal('continue')
@@ -62,7 +62,7 @@ describe('analyzer', function() {
           grid.add(2, 'red')
           grid.add(2, 'red')
 
-          let analyzer = new Analyzer(grid); 
+          let analyzer = new Analyzer(grid);
 
           //then
           expect(analyzer.result()).to.equal('win')
@@ -107,7 +107,7 @@ describe('analyzer', function() {
         })
       })
 
-      
+
     })
 
     describe('check by line', function() {
@@ -115,15 +115,15 @@ describe('analyzer', function() {
         it('returns "win"', function() {
             // given
             let grid = new Grid();
-  
+
             //when
             grid.add(1, 'red')
             grid.add(2, 'red')
             grid.add(3, 'red')
             grid.add(4, 'red')
-  
-            let analyzer = new Analyzer(grid); 
-  
+
+            let analyzer = new Analyzer(grid);
+
             //then
             expect(analyzer.result()).to.equal('win')
         })
@@ -133,7 +133,7 @@ describe('analyzer', function() {
         it('returns "win"', function() {
             // given
             let grid = new Grid();
-  
+
             //when
             grid.add(2, 'yellow')
             grid.add(3, 'red')
@@ -143,9 +143,9 @@ describe('analyzer', function() {
             grid.add(3, 'red')
             grid.add(4, 'red')
             grid.add(5, 'red')
-  
-            let analyzer = new Analyzer(grid); 
-  
+
+            let analyzer = new Analyzer(grid);
+
             //then
             expect(analyzer.result()).to.equal('win')
         })
@@ -234,7 +234,43 @@ describe('analyzer', function() {
 
           grid.add(7, 'yellow')
           grid.add(7, 'red')
-          
+
+          let analyzer = new Analyzer(grid);
+
+          //then
+          expect(analyzer.result()).to.equal('win')
+        })
+      })
+
+      describe('when given a grid with 4 chips aligned from last (6th) row and last (7th) column', function(){
+        it('returns win', function(){
+          //given
+          let grid = new Grid();
+
+          //when
+          grid.add(7, 'red')
+          grid.add(7, 'red')
+          grid.add(7, 'red')
+          grid.add(7, 'yellow')
+          grid.add(7, 'yellow')
+          grid.add(7, 'red')
+
+          grid.add(6, 'yellow')
+          grid.add(6, 'yellow')
+          grid.add(6, 'yellow')
+          grid.add(6, 'red')
+          grid.add(6, 'red')
+
+          grid.add(5, 'red')
+          grid.add(5, 'red')
+          grid.add(5, 'yellow')
+          grid.add(5, 'red')
+
+          grid.add(4, 'yellow')
+          grid.add(4, 'yellow')
+          grid.add(4, 'red')
+
+
           let analyzer = new Analyzer(grid);
 
           //then
@@ -243,5 +279,25 @@ describe('analyzer', function() {
       })
     })
 
+    describe('when given a full grid with no 4 chips aligned', function() {
+      it('returns "tie"', function() {
+        // given
+        let grid = new Grid();
+        for(let columnIndex = 0; columnIndex <= 6; columnIndex++) {
+          let colors = ['red', 'yellow'];
+          let color_bottom = colors[columnIndex%2]
+          let color_top = colors[(columnIndex+1)%2]
+
+          for (let rowIndex = 0; rowIndex <= 5; rowIndex++) {
+            if (rowIndex <=2) grid.add(columnIndex+1, color_bottom);
+            else grid.add(columnIndex+1, color_top);
+          }
+        }
+
+        // assert
+        let analyzer = new Analyzer(grid);
+        expect(analyzer.result()).to.equal('tie')
+      })
+    })
   })
 })

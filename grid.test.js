@@ -14,11 +14,11 @@ describe('#grid', function()
       grid = new Grid()
    })
 
-   context('empty grid', function() 
-   { 
-      it('should return empty grid', function() 
+   context('empty grid', function()
+   {
+      it('should return empty grid', function()
       {
-         // WHEN 
+         // WHEN
          grid = new Grid()
 
          // THEN
@@ -28,12 +28,12 @@ describe('#grid', function()
 
       context('with bad color', function()
       {
-         it('should throw error', function() 
+         it('should throw error', function()
          {
             // THEN
             expect(function () {grid.add(1,'lol')}).to.throw('bad color')
          })
-         it('should throw error', function() 
+         it('should throw error', function()
          {
             // THEN
             expect(function () {grid.add(1,111)}).to.throw('bad color')
@@ -42,7 +42,7 @@ describe('#grid', function()
 
       context('with good color', function()
       {
-         it('should not throw error', function() 
+         it('should not throw error', function()
          {
             // THEN
             expect(function () { grid.add(1,'yellow') }).to.not.throw()
@@ -50,12 +50,12 @@ describe('#grid', function()
 
          context('with bad column number', function()
          {
-            it('should throw error', function() 
+            it('should throw error', function()
             {
                // THEN
                expect(function () { grid.add(grid.columns+1,'yellow') }).to.throw('bad column number')
             })
-            it('should throw error', function() 
+            it('should throw error', function()
             {
                // THEN
                expect(function () { grid.add("lol",'yellow') }).to.throw('bad column number')
@@ -64,32 +64,32 @@ describe('#grid', function()
 
          context('with good column number', function()
          {
-            it('should not throw an error', function() 
+            it('should not throw an error', function()
             {
                // THEN
                expect(function () { grid.add(1,'yellow') }).to.not.throw()
             })
 
-            it('should add the chip at the top', function() 
+            it('should add the chip at the top', function()
             {
                // GIVEN
                grid.add(1, "red")
-      
+
                // WHEN
                grid.add(1, "yellow")
-               
+
                // THEN
                expect(grid.state()[0][0]).to.equal("red")
                expect(grid.state()[0][1]).to.equal("yellow")
             })
-      
-            it('should stop adding in column after 6 chips', function() 
+
+            it('should stop adding in column after 6 chips', function()
             {
                // GIVEN
                for (i = 0 ; i < grid.lines ; i++) {
                   grid.add(1, "red")
                }
-               
+
                // THEN
                expect(function () {grid.add(1,'yellow')}).to.throw('column full')
                expect(grid.state()[0]).not.contains("yellow")
@@ -101,16 +101,16 @@ describe('#grid', function()
 
 
 
-   context('grid is not empty', function() 
+   context('grid is not empty', function()
    {
-      it ('sould be emptied', function() 
-      {  
+      it ('sould be emptied', function()
+      {
          // GIVEN
          grid.add(1, "red")
 
          // WHEN
          grid.empty()
-         
+
          // THEN
          expectedResult = Array(grid.columns).fill('').map(x => Array(grid.lines).fill(''))
          expect(grid.state()).to.deep.equal(expectedResult)

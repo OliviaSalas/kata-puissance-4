@@ -1,7 +1,7 @@
 'use strict'
 
 
-let Grid = class Grid 
+let Grid = class Grid
 {
    constructor() {
       this.columns = 7
@@ -17,19 +17,19 @@ let Grid = class Grid
       return this.grid
    }
 
-   add (columnNumber, color) 
+   add (columnNumber, color)
    {
-      if (!Number.isInteger(columnNumber) || columnNumber > this.columns || columnNumber < 0) 
+      if (!Number.isInteger(columnNumber) || columnNumber > this.columns || columnNumber < 0)
          throw new Error('bad column number')
 
-      if (!['yellow', 'red'].includes(color)) 
+      if (!['yellow', 'red'].includes(color))
          throw new Error('bad color')
 
       var firstEmptyRow = this.grid[columnNumber-1].findIndex(x => x === '')
-      
-      if (firstEmptyRow === -1) 
+
+      if (firstEmptyRow === -1)
          throw new Error('column full')
-      
+
       this.grid[columnNumber-1][firstEmptyRow] = color
    }
 
