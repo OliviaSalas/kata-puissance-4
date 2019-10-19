@@ -76,71 +76,19 @@ describe('#Referee', function()
         let analyzer = new Analyzer(grid);
         let referee = new Referee(analyzer, grid);
 
-        // for (let i = 1; i <= 6; i++) {
-        //   for (let j = 1; j <= 3; j++) {
-        //     let index;
-        //     if ((referee.whoseTurnIsIt() == 'yellow') && (i%2 == 0)) {
-        //       referee.currentPlayerPlays(7 - i)
-        //       referee.currentPlayerPlays(i)
-        //     } else {
-        //       referee.currentPlayerPlays(i)
-        //       referee.currentPlayerPlays(7 - i)
-        //     }
-        //   }
-        // }
-          //
-
-        referee.currentPlayerPlays(1);
-        referee.currentPlayerPlays(2);
-        referee.currentPlayerPlays(1);
-        referee.currentPlayerPlays(2);
-        referee.currentPlayerPlays(1);
-        referee.currentPlayerPlays(2);
-
-        referee.currentPlayerPlays(2);
-        referee.currentPlayerPlays(1);
-        referee.currentPlayerPlays(2);
-        referee.currentPlayerPlays(1);
-        referee.currentPlayerPlays(2);
-        referee.currentPlayerPlays(1);
-
-        referee.currentPlayerPlays(3);
-        referee.currentPlayerPlays(4);
-        referee.currentPlayerPlays(3);
-        referee.currentPlayerPlays(4);
-        referee.currentPlayerPlays(3);
-        referee.currentPlayerPlays(4);
-
-        referee.currentPlayerPlays(4);
-        referee.currentPlayerPlays(3);
-        referee.currentPlayerPlays(4);
-        referee.currentPlayerPlays(3);
-        referee.currentPlayerPlays(4);
-        referee.currentPlayerPlays(3);
-
-        referee.currentPlayerPlays(5);
-        referee.currentPlayerPlays(6);
-        referee.currentPlayerPlays(5);
-        referee.currentPlayerPlays(6);
-        referee.currentPlayerPlays(5);
-        referee.currentPlayerPlays(6);
-
-        referee.currentPlayerPlays(6);
-        referee.currentPlayerPlays(5);
-        referee.currentPlayerPlays(6);
-        referee.currentPlayerPlays(5);
-        referee.currentPlayerPlays(6);
-        referee.currentPlayerPlays(5);
-
-        referee.currentPlayerPlays(7);
-        referee.currentPlayerPlays(7);
-        referee.currentPlayerPlays(7);
-        referee.currentPlayerPlays(7);
-        referee.currentPlayerPlays(7);
-        referee.currentPlayerPlays(7);
-
-
-        console.log(grid.grid);
+        for (let startingColumn = 1; startingColumn <= 5; startingColumn+=2) {
+          for (let i = 1; i <= 3; i++) {
+            referee.currentPlayerPlays(startingColumn);
+            referee.currentPlayerPlays(startingColumn+1);
+          }
+          for (let i = 1; i <= 3; i++) {
+            referee.currentPlayerPlays(startingColumn+1);
+            referee.currentPlayerPlays(startingColumn);
+          }
+        }
+        for (let i = 1; i <= 6; i++) {
+          referee.currentPlayerPlays(7);
+        }
 
         // assert
         expect(referee.getGameState()).to.equal('Tie !');
